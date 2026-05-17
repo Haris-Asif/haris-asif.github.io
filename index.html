@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Haris Asif — IT & DevOps Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --card: #12121a;
+    --border: #1e1e2e;
+    --accent1: #ff6b35;
+    --accent2: #00d4ff;
+    --accent3: #a855f7;
+    --accent4: #22d3ee;
+    --text: #f0f0f5;
+    --muted: #7a7a9a;
+    --gradient: linear-gradient(135deg, #ff6b35, #a855f7, #00d4ff);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom Cursor */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--accent1);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9999;
+    transition: transform 0.1s ease;
+    mix-blend-mode: screen;
+  }
+  .cursor-trail {
+    width: 32px; height: 32px;
+    border: 1.5px solid var(--accent2);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9998;
+    transition: all 0.25s ease;
+    mix-blend-mode: screen;
+  }
+
+  /* Noise overlay */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0; opacity: 0.5;
+  }
+
+  /* Nav */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 3rem;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 1.2rem;
+    background: var(--gradient);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    letter-spacing: -0.02em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent2); }
+
+  /* Hero */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 8rem 3rem 4rem;
+    position: relative; overflow: hidden;
+  }
+
+  .hero-bg-blob {
+    position: absolute; border-radius: 50%;
+    filter: blur(100px); pointer-events: none;
+  }
+  .blob1 { width: 500px; height: 500px; background: rgba(255,107,53,0.12); top: -100px; right: -100px; animation: blobFloat 8s ease-in-out infinite; }
+  .blob2 { width: 400px; height: 400px; background: rgba(168,85,247,0.1); bottom: -50px; left: -100px; animation: blobFloat 10s ease-in-out infinite reverse; }
+  .blob3 { width: 300px; height: 300px; background: rgba(0,212,255,0.08); top: 40%; left: 40%; animation: blobFloat 7s ease-in-out infinite 2s; }
+
+  @keyframes blobFloat {
+    0%, 100% { transform: translate(0,0) scale(1); }
+    33% { transform: translate(20px,-20px) scale(1.05); }
+    66% { transform: translate(-10px,15px) scale(0.97); }
+  }
+
+  .hero-content { position: relative; z-index: 1; max-width: 860px; }
+
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(0,212,255,0.08);
+    border: 1px solid rgba(0,212,255,0.25);
+    color: var(--accent2); font-size: 0.72rem;
+    padding: 0.4rem 1rem; border-radius: 100px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-tag .dot { width: 6px; height: 6px; background: var(--accent2); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.8)} }
+
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 800; line-height: 0.95;
+    letter-spacing: -0.04em;
+    margin-bottom: 1rem;
+    animation: fadeUp 0.6s ease 0.1s both;
+  }
+  .hero-name .line2 {
+    background: var(--gradient);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    display: block;
+  }
+
+  .hero-title {
+    font-size: 1rem; color: var(--muted);
+    letter-spacing: 0.05em; margin-bottom: 1.8rem;
+    animation: fadeUp 0.6s ease 0.2s both;
+  }
+  .hero-title span { color: var(--accent1); }
+
+  .hero-desc {
+    font-size: 0.9rem; color: var(--muted);
+    max-width: 520px; line-height: 1.8;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.6s ease 0.3s both;
+  }
+
+  .hero-ctas {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeUp 0.6s ease 0.4s both;
+  }
+  .btn-primary {
+    background: var(--gradient);
+    color: #fff; font-family: 'DM Mono', monospace;
+    font-size: 0.78rem; letter-spacing: 0.08em;
+    padding: 0.85rem 2rem; border-radius: 6px;
+    text-decoration: none; border: none; cursor: none;
+    transition: opacity 0.2s, transform 0.2s;
+    font-weight: 500;
+  }
+  .btn-primary:hover { opacity: 0.85; transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text); font-family: 'DM Mono', monospace;
+    font-size: 0.78rem; letter-spacing: 0.08em;
+    padding: 0.85rem 2rem; border-radius: 6px;
+    text-decoration: none; cursor: none;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--accent2); color: var(--accent2); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 4rem;
+    padding-top: 2rem; border-top: 1px solid var(--border);
+    animation: fadeUp 0.6s ease 0.5s both;
+  }
+  .stat-num {
+    font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800;
+    background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .stat-label { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.2rem; }
+
+  @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+
+  /* Section base */
+  section { padding: 6rem 3rem; position: relative; }
+  .section-label {
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent1); margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 800; letter-spacing: -0.03em; margin-bottom: 3rem;
+  }
+  .section-title em { font-style: normal; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+  /* Skills */
+  #skills { background: var(--card); }
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;
+  }
+  .skill-card {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.6rem;
+    transition: border-color 0.3s, transform 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .skill-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .skill-card:nth-child(1)::before { background: var(--accent1); }
+  .skill-card:nth-child(2)::before { background: var(--accent2); }
+  .skill-card:nth-child(3)::before { background: var(--accent3); }
+  .skill-card:nth-child(4)::before { background: var(--accent4); }
+  .skill-card:nth-child(5)::before { background: var(--accent1); }
+  .skill-card:nth-child(6)::before { background: var(--accent2); }
+  .skill-card:hover { border-color: rgba(255,107,53,0.4); transform: translateY(-4px); }
+  .skill-card:hover::before { opacity: 1; }
+  .skill-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+  .skill-name {
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.8rem; }
+  .tag {
+    font-size: 0.65rem; letter-spacing: 0.06em;
+    padding: 0.25rem 0.6rem; border-radius: 4px;
+    background: rgba(255,255,255,0.05); color: var(--muted);
+    border: 1px solid var(--border);
+  }
+
+  /* Experience */
+  #experience {}
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 1px; background: linear-gradient(to bottom, var(--accent1), var(--accent3), var(--accent2));
+  }
+  .timeline-item {
+    position: relative; margin-bottom: 3rem; padding-left: 1.5rem;
+  }
+  .timeline-dot {
+    position: absolute; left: -2.45rem; top: 0.35rem;
+    width: 12px; height: 12px; border-radius: 50%;
+    border: 2px solid var(--accent1); background: var(--bg);
+    transition: background 0.3s;
+  }
+  .timeline-item:hover .timeline-dot { background: var(--accent1); }
+  .timeline-date {
+    font-size: 0.7rem; color: var(--accent2);
+    letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem;
+  }
+  .timeline-role {
+    font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700;
+    margin-bottom: 0.2rem;
+  }
+  .timeline-company {
+    font-size: 0.8rem; color: var(--accent1); margin-bottom: 0.8rem;
+    letter-spacing: 0.04em;
+  }
+  .timeline-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.8; }
+  .timeline-desc li { margin-bottom: 0.3rem; list-style: none; padding-left: 1rem; position: relative; }
+  .timeline-desc li::before { content: '→'; position: absolute; left: 0; color: var(--accent3); }
+
+  /* Projects */
+  #projects { background: var(--card); }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+  .project-card {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.8rem;
+    transition: transform 0.3s, border-color 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .project-card:hover { transform: translateY(-6px); border-color: var(--accent3); }
+  .project-num {
+    font-family: 'Syne', sans-serif; font-size: 3.5rem; font-weight: 800;
+    color: rgba(255,255,255,0.04); position: absolute; top: 0.5rem; right: 1rem;
+    line-height: 1;
+  }
+  .project-tag {
+    font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent3); margin-bottom: 0.8rem;
+  }
+  .project-title {
+    font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700;
+    margin-bottom: 0.6rem;
+  }
+  .project-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.7; }
+
+  /* Certifications */
+  #certifications {}
+  .cert-list { display: flex; flex-direction: column; gap: 1rem; }
+  .cert-item {
+    display: flex; align-items: center; gap: 1.5rem;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.2rem 1.5rem;
+    transition: border-color 0.3s, transform 0.2s;
+  }
+  .cert-item:hover { border-color: var(--accent2); transform: translateX(6px); }
+  .cert-icon { font-size: 1.5rem; flex-shrink: 0; }
+  .cert-name { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.95rem; }
+  .cert-issuer { font-size: 0.72rem; color: var(--muted); margin-top: 0.15rem; }
+  .cert-badge {
+    margin-left: auto; font-size: 0.65rem; letter-spacing: 0.08em;
+    padding: 0.3rem 0.8rem; border-radius: 100px;
+    background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.2);
+    color: var(--accent2); white-space: nowrap;
+  }
+
+  /* DevOps Learning */
+  #learning { background: var(--card); }
+  .learning-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+  .learning-item {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.2rem;
+    display: flex; flex-direction: column; gap: 0.6rem;
+  }
+  .learning-header { display: flex; align-items: center; gap: 0.6rem; }
+  .learning-icon { font-size: 1.2rem; }
+  .learning-name { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.88rem; }
+  .progress-bar { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 2px; background: var(--gradient); }
+  .progress-label { font-size: 0.65rem; color: var(--muted); display: flex; justify-content: space-between; }
+
+  /* Contact */
+  #contact {}
+  .contact-wrapper {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+  }
+  .contact-info { }
+  .contact-line {
+    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 1.2rem; padding: 1rem 1.2rem;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; text-decoration: none; color: var(--text);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .contact-line:hover { border-color: var(--accent1); transform: translateX(4px); }
+  .contact-line-icon { font-size: 1.1rem; }
+  .contact-line-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+  .contact-line-value { font-size: 0.85rem; margin-top: 0.1rem; }
+  .contact-cta { }
+  .contact-cta-text {
+    font-family: 'Syne', sans-serif; font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 800; letter-spacing: -0.03em; margin-bottom: 1rem; line-height: 1.2;
+  }
+  .contact-cta-sub { font-size: 0.85rem; color: var(--muted); line-height: 1.7; margin-bottom: 2rem; }
+
+  /* Footer */
+  footer {
+    text-align: center; padding: 2rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.72rem; color: var(--muted);
+  }
+  footer span { color: var(--accent1); }
+
+  /* Scroll reveal */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    #hero { padding: 7rem 1.5rem 3rem; }
+    .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+    .contact-wrapper { grid-template-columns: 1fr; gap: 2rem; }
+  }
+
+  /* Glitch hover on name */
+  .hero-name:hover .line2 {
+    animation: glitch 0.3s steps(2, end) 1;
+  }
+  @keyframes glitch {
+    0% { text-shadow: 2px 0 var(--accent1), -2px 0 var(--accent2); }
+    33% { text-shadow: -2px 0 var(--accent1), 2px 0 var(--accent2); }
+    66% { text-shadow: 2px 2px var(--accent3), -2px -2px var(--accent1); }
+    100% { text-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-trail" id="cursorTrail"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">HA/</div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certifications">Certs</a></li>
+    <li><a href="#learning">Learning</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-blob blob1"></div>
+  <div class="hero-bg-blob blob2"></div>
+  <div class="hero-bg-blob blob3"></div>
+  <div class="hero-content">
+    <div class="hero-tag"><span class="dot"></span> Available for DevOps Roles</div>
+    <h1 class="hero-name">
+      Haris<br>
+      <span class="line2">Asif</span>
+    </h1>
+    <p class="hero-title">System Support Engineer → <span>Aspiring DevOps Engineer</span></p>
+    <p class="hero-desc">
+      IT professional from Rawalpindi with hands-on experience in Windows infrastructure, 
+      Active Directory, and network support. On a mission to bridge helpdesk expertise 
+      with DevOps practices — cloud, automation, and CI/CD pipelines ahead.
+    </p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary">Get In Touch</a>
+      <a href="#experience" class="btn-outline">View Experience</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">4+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div>
+        <div class="stat-num">3</div>
+        <div class="stat-label">Companies</div>
+      </div>
+      <div>
+        <div class="stat-num">3</div>
+        <div class="stat-label">Certifications</div>
+      </div>
+      <div>
+        <div class="stat-num">5+</div>
+        <div class="stat-label">Core Skills</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">// 01 — What I Bring</div>
+  <h2 class="section-title">Core <em>Skills</em></h2>
+  <div class="skills-grid reveal">
+    <div class="skill-card">
+      <div class="skill-icon">🖥️</div>
+      <div class="skill-name">Windows Infrastructure</div>
+      <p style="font-size:0.78rem;color:var(--muted);line-height:1.6">Administration of Windows OS and Server environments with focus on stability and uptime.</p>
+      <div class="skill-tags">
+        <span class="tag">Windows 7/10/11</span>
+        <span class="tag">Windows Server</span>
+        <span class="tag">Event Logs</span>
+        <span class="tag">Updates</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">👥</div>
+      <div class="skill-name">Identity & Access</div>
+      <p style="font-size:0.78rem;color:var(--muted);line-height:1.6">User lifecycle management across on-prem AD and cloud-based Entra ID (Azure AD).</p>
+      <div class="skill-tags">
+        <span class="tag">Active Directory</span>
+        <span class="tag">Entra ID</span>
+        <span class="tag">Group Policy</span>
+        <span class="tag">Access Control</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🌐</div>
+      <div class="skill-name">Networking</div>
+      <p style="font-size:0.78rem;color:var(--muted);line-height:1.6">LAN/Wi-Fi troubleshooting and physical network deployments including IPRAN infrastructure.</p>
+      <div class="skill-tags">
+        <span class="tag">LAN/Wi-Fi</span>
+        <span class="tag">Routers & Switches</span>
+        <span class="tag">CCNA</span>
+        <span class="tag">Site Surveys</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🎫</div>
+      <div class="skill-name">IT Helpdesk</div>
+      <p style="font-size:0.78rem;color:var(--muted);line-height:1.6">End-to-end ticket management, remote support, and user training across multiple tools.</p>
+      <div class="skill-tags">
+        <span class="tag">Ticketing Systems</span>
+        <span class="tag">AnyDesk</span>
+        <span class="tag">TeamViewer</span>
+        <span class="tag">RDP</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🐍</div>
+      <div class="skill-name">Automation (Python)</div>
+      <p style="font-size:0.78rem;color:var(--muted);line-height:1.6">Built a Python automation tool at Nova Communications to streamline IPTV support workflows.</p>
+      <div class="skill-tags">
+        <span class="tag">Python</span>
+        <span class="tag">Scripting</span>
+        <span class="tag">Automation</span>
+        <span class="tag">IPTV</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">☁️</div>
+      <div class="skill-name">Cloud & Microsoft 365</div>
+      <p style="font-size:0.78rem;color:var(--muted);line-height:1.6">Microsoft 365 administration including user management, licensing, and cloud service configuration.</p>
+      <div class="skill-tags">
+        <span class="tag">Microsoft 365</span>
+        <span class="tag">Entra ID</span>
+        <span class="tag">Cloud Admin</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">// 02 — Where I've Worked</div>
+  <h2 class="section-title">Work <em>Experience</em></h2>
+  <div class="timeline reveal">
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">Aug 2025 — Present</div>
+      <div class="timeline-role">Virtual Assistant</div>
+      <div class="timeline-company">Cloudrexpo, Rawalpindi</div>
+      <ul class="timeline-desc">
+        <li>IT helpdesk support: user account management, password resets, shared folder permissions on Windows Server</li>
+        <li>Windows Server tasks: event log monitoring, updates, and user access management</li>
+        <li>Vendor coordination for hardware procurement and IT inventory tracking</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">May 2024 — Jul 2025</div>
+      <div class="timeline-role">TAC Engineer</div>
+      <div class="timeline-company">Nova Communications, Islamabad</div>
+      <ul class="timeline-desc">
+        <li>Managed IT helpdesk tickets for Windows OS, printers, networking, and software installation</li>
+        <li>Active Directory user management: account creation, group membership, access control</li>
+        <li>Windows Server support: health monitoring, backup verification, update management</li>
+        <li>Delivered remote support via AnyDesk, TeamViewer, and RDP</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">Mar 2021 — Apr 2023</div>
+      <div class="timeline-role">Site Engineer</div>
+      <div class="timeline-company">Spine Engineering Pvt Ltd, Islamabad</div>
+      <ul class="timeline-desc">
+        <li>Installed and maintained network equipment including routers, switches, and peripherals</li>
+        <li>Conducted hardware troubleshooting and coordinated with vendors for repairs</li>
+        <li>Performed site surveys and produced detailed network layout documentation</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">// 03 — What I've Built</div>
+  <h2 class="section-title">Key <em>Projects</em></h2>
+  <div class="projects-grid reveal">
+    <div class="project-card">
+      <div class="project-num">01</div>
+      <div class="project-tag">Telecom Infrastructure</div>
+      <div class="project-title">Jazz Mega 2020 — IPRAN Deployment</div>
+      <p class="project-desc">Led IPRAN infrastructure deployment for Jazz's Mega 2020 initiative at Spine Engineering. Coordinated physical installation, network configuration, and site verification across multiple locations.</p>
+    </div>
+    <div class="project-card">
+      <div class="project-num">02</div>
+      <div class="project-tag">Technical Proposals</div>
+      <div class="project-title">CMPAK Bidding — Vendor Coordination</div>
+      <p class="project-desc">Contributed to the CMPAK bidding process by preparing technical proposals and coordinating with vendors for hardware specifications, pricing, and delivery logistics.</p>
+    </div>
+    <div class="project-card">
+      <div class="project-num">03</div>
+      <div class="project-tag">Python Automation</div>
+      <div class="project-title">IPTV Assistant Tool</div>
+      <p class="project-desc">Developed a Python automation tool at Nova Communications to streamline IPTV support operations — reducing manual effort and improving ticket resolution times for common issues.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-label">// 04 — Credentials</div>
+  <h2 class="section-title">Certifications & <em>Training</em></h2>
+  <div class="cert-list reveal">
+    <div class="cert-item">
+      <div class="cert-icon">🏅</div>
+      <div>
+        <div class="cert-name">Microsoft 365 Administration</div>
+        <div class="cert-issuer">LinkedIn Learning</div>
+      </div>
+      <div class="cert-badge">Cloud</div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-icon">🌐</div>
+      <div>
+        <div class="cert-name">CCNA — Cisco Certified Network Associate</div>
+        <div class="cert-issuer">eHunarmand</div>
+      </div>
+      <div class="cert-badge">Networking</div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-icon">🖥️</div>
+      <div>
+        <div class="cert-name">System Administration & IT Infrastructure</div>
+        <div class="cert-issuer">NAVTTC</div>
+      </div>
+      <div class="cert-badge">Sysadmin</div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-icon">🎓</div>
+      <div>
+        <div class="cert-name">BS Electrical Engineering</div>
+        <div class="cert-issuer">Air University, Islamabad — 2020</div>
+      </div>
+      <div class="cert-badge">Degree</div>
+    </div>
+  </div>
+</section>
+
+<!-- DEVOPS LEARNING ROADMAP -->
+<section id="learning">
+  <div class="section-label">// 05 — DevOps Journey</div>
+  <h2 class="section-title">Currently <em>Learning</em></h2>
+  <p style="font-size:0.85rem;color:var(--muted);max-width:560px;margin-bottom:2.5rem;line-height:1.7">
+    Actively upskilling toward a DevOps role. My IT foundation gives me a strong head-start — now adding cloud, containers, and automation tools to the mix.
+  </p>
+  <div class="learning-grid reveal">
+    <div class="learning-item">
+      <div class="learning-header"><span class="learning-icon">🐧</span><span class="learning-name">Linux</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:60%"></div></div>
+      <div class="progress-label"><span>In Progress</span><span>60%</span></div>
+    </div>
+    <div class="learning-item">
+      <div class="learning-header"><span class="learning-icon">☁️</span><span class="learning-name">AWS / Azure</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:40%"></div></div>
+      <div class="progress-label"><span>Exploring</span><span>40%</span></div>
+    </div>
+    <div class="learning-item">
+      <div class="learning-header"><span class="learning-icon">🐳</span><span class="learning-name">Docker</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:35%"></div></div>
+      <div class="progress-label"><span>Getting Started</span><span>35%</span></div>
+    </div>
+    <div class="learning-item">
+      <div class="learning-header"><span class="learning-icon">⚙️</span><span class="learning-name">CI/CD Pipelines</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:25%"></div></div>
+      <div class="progress-label"><span>Beginner</span><span>25%</span></div>
+    </div>
+    <div class="learning-item">
+      <div class="learning-header"><span class="learning-icon">📜</span><span class="learning-name">Bash Scripting</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:50%"></div></div>
+      <div class="progress-label"><span>Comfortable</span><span>50%</span></div>
+    </div>
+    <div class="learning-item">
+      <div class="learning-header"><span class="learning-icon">🔧</span><span class="learning-name">Terraform / IaC</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:15%"></div></div>
+      <div class="progress-label"><span>Just Starting</span><span>15%</span></div>
+    </div>
+    <div class="learning-item">
+      <div class="learning-header"><span class="learning-icon">🐍</span><span class="learning-name">Python</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:55%"></div></div>
+      <div class="progress-label"><span>Growing</span><span>55%</span></div>
+    </div>
+    <div class="learning-item">
+      <div class="learning-header"><span class="learning-icon">🌿</span><span class="learning-name">Git & GitHub</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:45%"></div></div>
+      <div class="progress-label"><span>Practicing</span><span>45%</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">// 06 — Let's Connect</div>
+  <h2 class="section-title">Get In <em>Touch</em></h2>
+  <div class="contact-wrapper reveal">
+    <div class="contact-info">
+      <a href="mailto:haris29430@gmail.com" class="contact-line">
+        <span class="contact-line-icon">✉️</span>
+        <div>
+          <div class="contact-line-label">Email</div>
+          <div class="contact-line-value">haris29430@gmail.com</div>
+        </div>
+      </a>
+      <a href="tel:+923165685168" class="contact-line">
+        <span class="contact-line-icon">📱</span>
+        <div>
+          <div class="contact-line-label">Phone</div>
+          <div class="contact-line-value">+92 316 5685168</div>
+        </div>
+      </a>
+      <div class="contact-line">
+        <span class="contact-line-icon">📍</span>
+        <div>
+          <div class="contact-line-label">Location</div>
+          <div class="contact-line-value">Rawalpindi, Pakistan</div>
+        </div>
+      </div>
+      <a href="https://github.com/harisasif" target="_blank" class="contact-line">
+        <span class="contact-line-icon">🐙</span>
+        <div>
+          <div class="contact-line-label">GitHub</div>
+          <div class="contact-line-value">github.com/harisasif</div>
+        </div>
+      </a>
+    </div>
+    <div class="contact-cta">
+      <div class="contact-cta-text">Open to DevOps & Cloud opportunities</div>
+      <p class="contact-cta-sub">
+        I bring solid IT fundamentals — Windows infrastructure, networking, scripting — 
+        and I'm actively building on that with cloud and DevOps tools. If you're looking 
+        for someone who understands both the helpdesk and the pipeline, let's talk.
+      </p>
+      <a href="mailto:haris29430@gmail.com" class="btn-primary">Send Me a Message →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Built with ❤️ by <span>Haris Asif</span> — Rawalpindi, Pakistan · 2025</p>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const trail = document.getElementById('cursorTrail');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX - 6 + 'px';
+    cursor.style.top = e.clientY - 6 + 'px';
+    setTimeout(() => {
+      trail.style.left = e.clientX - 16 + 'px';
+      trail.style.top = e.clientY - 16 + 'px';
+    }, 80);
+  });
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.style.transform = 'scale(2.5)');
+    el.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
