@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Haris Asif — IT Support | DevOps Aspirant | AZ-104 Ready</title>
+<title>Haris Asif — IT Support | System Administrator | DevOps Aspirant</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -230,22 +230,7 @@
   .profile-img-wrapper:hover .profile-img {
     filter: grayscale(0%) contrast(1.02);
   }
-  .img-badge {
-    position: absolute;
-    bottom: -12px;
-    right: -8px;
-    background: var(--card);
-    backdrop-filter: blur(4px);
-    border: 1px solid var(--accent2);
-    border-radius: 40px;
-    padding: 6px 12px;
-    font-size: 0.7rem;
-    font-weight: 500;
-    color: var(--accent2);
-    font-family: 'DM Mono', monospace;
-    letter-spacing: 0.5px;
-    box-shadow: var(--shadow-sm);
-  }
+  /* Image badge removed as requested */
 
   @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
 
@@ -351,36 +336,73 @@
     color: var(--accent2);
   }
 
-  /* DevOps Learning with AZ-104 Highlight */
-  #learning { background: var(--card); }
-  .learning-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; }
-  .learning-item {
-    background: var(--bg); border: 1px solid var(--border);
-    border-radius: 12px; padding: 1rem;
+  /* Learning Grid — Clear pathway */
+  .learning-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.2rem;
+    margin-bottom: 2rem;
   }
-  .learning-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.8rem; }
-  .learning-icon { font-size: 1.2rem; }
-  .learning-name { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.85rem; }
-  .progress-bar { height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; margin: 0.5rem 0; }
-  .progress-fill { height: 100%; border-radius: 3px; background: var(--gradient); }
-  .progress-label { font-size: 0.65rem; color: var(--muted); display: flex; justify-content: space-between; }
-  .az-badge {
-    margin-top: 1.8rem;
-    background: linear-gradient(95deg, #0F172A, #1E293B);
-    border-left: 4px solid var(--accent1);
-    padding: 1rem 1.5rem;
-    border-radius: 12px;
+  .learning-item {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.2rem;
+    transition: all 0.2s;
+  }
+  .learning-item:hover {
+    border-color: var(--accent2);
+    transform: translateY(-2px);
+  }
+  .learning-header {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 0.5rem;
   }
-  .az-badge span:first-child {
+  .learning-icon { font-size: 1.3rem; }
+  .learning-name {
+    font-family: 'Syne', sans-serif;
     font-weight: 700;
+    font-size: 0.9rem;
+  }
+  .progress-bar {
+    height: 5px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 0.8rem 0 0.4rem;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 3px;
     background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 1rem;
+  }
+  .progress-label {
+    font-size: 0.65rem;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+  }
+  .next-stop {
+    margin-top: 0.6rem;
+    font-size: 0.7rem;
+    color: var(--accent2);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    letter-spacing: 0.3px;
+    font-weight: 500;
+  }
+  .next-stop span {
+    font-size: 0.9rem;
+  }
+  .pathway-note {
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-top: 1rem;
+    border-left: 2px solid var(--accent2);
+    padding-left: 1rem;
   }
 
   /* Contact */
@@ -426,7 +448,6 @@
     .nav-links { display: none; }
     section { padding: 4rem 1.5rem; }
     .contact-wrapper { grid-template-columns: 1fr; gap: 2rem; }
-    .az-badge { justify-content: center; text-align: center; }
   }
 
   .hero-name:hover .line2 {
@@ -462,7 +483,7 @@
   <div class="hero-bg-blob blob3"></div>
   <div class="hero-grid">
     <div class="hero-text">
-      <div class="hero-tag"><span class="dot"></span> Open for DevOps Roles · USA hours ready</div>
+      <div class="hero-tag"><span class="dot"></span> IT Support | System Administrator</div>
       <h1 class="hero-name">
         Haris<br>
         <span class="line2">Asif</span>
@@ -486,9 +507,7 @@
     <div class="hero-image">
       <div class="profile-img-wrapper">
         <img class="profile-img" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&h=500&fit=crop" alt="Haris Asif - IT Professional" onerror="this.src='https://ui-avatars.com/api/?name=Haris+Asif&background=2B6EF0&color=fff&rounded=true&bold=true&size=128'">
-        <div class="img-badge">
-          ☁️ AZ-104 · DevOps Path
-        </div>
+        <!-- image badge removed -->
       </div>
     </div>
   </div>
@@ -540,20 +559,45 @@
 </section>
 
 <section id="learning">
-  <div class="section-label">// 05 — DevOps Journey</div>
-  <h2 class="section-title">Currently <em>Learning</em> & Next Steps</h2>
-  <p style="font-size:0.85rem;color:var(--muted);max-width:600px;margin-bottom:2rem;line-height:1.7">Actively upskilling toward a DevOps role. My IT foundation (system admin, networking, scripting) is the springboard — now adding cloud, containers, and CI/CD. First major milestone: <strong class="accent1">Microsoft Azure Administrator (AZ-104)</strong>.</p>
+  <div class="section-label">// 05 — DevOps Pathway</div>
+  <h2 class="section-title">Current & <em>Next Steps</em></h2>
+  <p style="font-size:0.85rem;color:var(--muted);max-width:620px;margin-bottom:2rem;line-height:1.7">Clear roadmap from system administration to DevOps. Active focus on Azure, followed by Red Hat certification and core automation tools.</p>
   <div class="learning-grid reveal">
-    <div class="learning-item"><div class="learning-header"><span class="learning-icon">☁️</span><span class="learning-name">Azure (AZ-104)</span></div><div class="progress-bar"><div class="progress-fill" style="width:55%"></div></div><div class="progress-label"><span>In-depth prep</span><span>55%</span></div></div>
-    <div class="learning-item"><div class="learning-header"><span class="learning-icon">🐧</span><span class="learning-name">Linux (RHEL)</span></div><div class="progress-bar"><div class="progress-fill" style="width:70%"></div></div><div class="progress-label"><span>Advanced CLI</span><span>70%</span></div></div>
-    <div class="learning-item"><div class="learning-header"><span class="learning-icon">🐳</span><span class="learning-name">Docker</span></div><div class="progress-bar"><div class="progress-fill" style="width:40%"></div></div><div class="progress-label"><span>Containers</span><span>40%</span></div></div>
-    <div class="learning-item"><div class="learning-header"><span class="learning-icon">⚙️</span><span class="learning-name">CI/CD (GitHub Actions)</span></div><div class="progress-bar"><div class="progress-fill" style="width:30%"></div></div><div class="progress-label"><span>Getting started</span><span>30%</span></div></div>
-    <div class="learning-item"><div class="learning-header"><span class="learning-icon">🔧</span><span class="learning-name">Terraform (IaC)</span></div><div class="progress-bar"><div class="progress-fill" style="width:25%"></div></div><div class="progress-label"><span>Foundations</span><span>25%</span></div></div>
-    <div class="learning-item"><div class="learning-header"><span class="learning-icon">🐍</span><span class="learning-name">Python / Bash</span></div><div class="progress-bar"><div class="progress-fill" style="width:60%"></div></div><div class="progress-label"><span>Automation</span><span>60%</span></div></div>
+    <!-- AZ-104: In progress -->
+    <div class="learning-item">
+      <div class="learning-header"><span class="learning-icon">☁️</span><span class="learning-name">Microsoft Azure (AZ-104)</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:55%"></div></div>
+      <div class="progress-label"><span>In Progress · Hands-on labs</span><span>55%</span></div>
+    </div>
+    <!-- RHCSA: Next stop (arrow) -->
+    <div class="learning-item">
+      <div class="learning-header"><span class="learning-icon">🐧</span><span class="learning-name">RHCSA (Red Hat)</span></div>
+      <div class="next-stop"><span>→</span> Next milestone</div>
+      <div class="progress-label" style="margin-top:0.3rem;">Enterprise Linux deep dive</div>
+    </div>
+    <!-- Docker: Next stop -->
+    <div class="learning-item">
+      <div class="learning-header"><span class="learning-icon">🐳</span><span class="learning-name">Containerization (Docker)</span></div>
+      <div class="next-stop"><span>→</span> Next stop</div>
+    </div>
+    <!-- CI/CD: Next stop -->
+    <div class="learning-item">
+      <div class="learning-header"><span class="learning-icon">⚙️</span><span class="learning-name">CI/CD Pipelines</span></div>
+      <div class="next-stop"><span>→</span> Up next</div>
+    </div>
+    <!-- Terraform: Next stop -->
+    <div class="learning-item">
+      <div class="learning-header"><span class="learning-icon">🔧</span><span class="learning-name">Infrastructure as Code (Terraform)</span></div>
+      <div class="next-stop"><span>→</span> Planned</div>
+    </div>
+    <!-- Python/Bash: Next stop (though already some knowledge, show as strengthening) -->
+    <div class="learning-item">
+      <div class="learning-header"><span class="learning-icon">🐍</span><span class="learning-name">Automation (Python/Bash)</span></div>
+      <div class="next-stop"><span>→</span> Deepen scripting</div>
+    </div>
   </div>
-  <div class="az-badge reveal">
-    <span>🎯 First DevOps Step: Microsoft Azure Administrator (AZ-104) — Exam ready Q2 2025</span>
-    <span style="font-size:0.7rem; color:var(--accent2);">⚡ Active preparation: Azure compute, storage, networking, identity</span>
+  <div class="pathway-note reveal">
+    ⚡ First target: <strong>AZ-104 (Azure Administrator)</strong> → then RHCSA → container orchestration & IaC.
   </div>
 </section>
 
@@ -565,10 +609,11 @@
       <a href="mailto:haris29430@gmail.com" class="contact-line"><span class="contact-line-icon">✉️</span><div><div class="contact-line-label">Email</div><div class="contact-line-value">haris29430@gmail.com</div></div></a>
       <a href="tel:+923165685168" class="contact-line"><span class="contact-line-icon">📱</span><div><div class="contact-line-label">Phone</div><div class="contact-line-value">+92 316 5685168</div></div></a>
       <div class="contact-line"><span class="contact-line-icon">📍</span><div><div class="contact-line-label">Location</div><div class="contact-line-value">Rawalpindi, Pakistan (Remote · USA hours ready)</div></div></div>
-      <a href="https://github.com/harisasif" target="_blank" class="contact-line"><span class="contact-line-icon">🐙</span><div><div class="contact-line-label">GitHub</div><div class="contact-line-value">github.com/harisasif</div></div></a>
+      <!-- LinkedIn instead of GitHub -->
+      <a href="https://www.linkedin.com/in/haris-asif-3bab56283/" target="_blank" class="contact-line"><span class="contact-line-icon">🔗</span><div><div class="contact-line-label">LinkedIn</div><div class="contact-line-value">linkedin.com/in/haris-asif</div></div></a>
     </div>
     <div class="contact-cta">
-      <div class="contact-cta-text">Open to DevOps & Cloud roles · AZ-104 in progress</div>
+      <div class="contact-cta-text">Open to IT Support & Junior DevOps roles · AZ-104 in progress</div>
       <p class="contact-cta-sub">I bring proven IT support fundamentals, system administration, networking, and a methodical approach to learning. Currently bridging the gap to DevOps with Azure, containers, and automation. If you need someone who understands both end-user needs and infrastructure reliability, let’s talk.</p>
       <a href="mailto:haris29430@gmail.com" class="btn-primary">Send Me a Message →</a>
     </div>
