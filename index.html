@@ -4,745 +4,883 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Haris Asif — IT Support | SysAdmin | DevOps Path</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Aktiv+Grotesk:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 <style>
-  /* --- BLACK & WHITE + ACCENT (SILENT BLUE) --- */
-  :root {
-    --bg-white: #FFFFFF;
-    --bg-offwhite: #F8FAFE;
-    --card-bg: #FFFFFF;
-    --border-light: #E9EDF2;
-    --border-focus: #C5CBD3;
-    --text-dark: #11181C;
-    --text-muted: #4A5A6E;
-    --accent: #1E3A5F;        /* deep navy, elegant contrast */
-    --accent-glow: #23456E;
-    --accent-soft: #2E4A72;
-    --shadow-sm: 0 6px 14px rgba(0, 0, 0, 0.02), 0 2px 4px rgba(0, 0, 0, 0.03);
-    --shadow-md: 0 12px 24px -12px rgba(0, 0, 0, 0.08);
-    --gradient-dark: linear-gradient(135deg, #1E2A38, #0F1A24);
-    --gradient-accent: linear-gradient(135deg, #1E3A5F, #2B4C6E);
-  }
+:root {
+  --black: #0a0a0a;
+  --white: #f5f4f0;
+  --pure-white: #ffffff;
+  --mid: #888888;
+  --light-gray: #d8d6d0;
+  --border: rgba(255,255,255,0.08);
+  --border-light: rgba(0,0,0,0.1);
+}
 
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
-  html {
-    scroll-behavior: smooth;
-  }
+html { scroll-behavior: smooth; font-size: 16px; }
 
-  body {
-    background: var(--bg-white);
-    color: var(--text-dark);
-    font-family: 'DM Mono', monospace;
-    overflow-x: hidden;
-    cursor: none;
-    line-height: 1.5;
-  }
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  cursor: none;
+}
 
-  /* --- CURSOR (black & white adaptation) --- */
-  .cursor {
-    width: 8px;
-    height: 8px;
-    background: #000000;
-    border-radius: 50%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    z-index: 9999;
-    transition: transform 0.2s ease;
-    box-shadow: 0 0 0 1px rgba(255,255,255,0.5);
-  }
-  .cursor-trail {
-    width: 32px;
-    height: 32px;
-    border: 1.5px solid #1E3A5F;
-    border-radius: 50%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    z-index: 9998;
-    transition: all 0.18s ease;
-    opacity: 0.45;
-  }
+/* ── GRAIN OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9000;
+  opacity: 0.5;
+}
 
-  /* --- NAVIGATION (light, crisp) --- */
-  nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 3rem;
-    background: rgba(255,255,255,0.92);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border-light);
-    transition: all 0.2s;
-  }
-  .nav-logo {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 1.4rem;
-    background: var(--gradient-accent);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    letter-spacing: -0.02em;
-  }
-  .nav-links {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-  }
-  .nav-links a {
-    color: var(--text-muted);
-    text-decoration: none;
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    font-weight: 500;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover {
-    color: var(--accent);
-  }
+/* ── CUSTOM CURSOR ── */
+.cursor-dot {
+  position: fixed;
+  width: 6px; height: 6px;
+  background: var(--white);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease, background 0.3s;
+  mix-blend-mode: difference;
+}
+.cursor-ring {
+  position: fixed;
+  width: 36px; height: 36px;
+  border: 1px solid rgba(245,244,240,0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%,-50%);
+  transition: transform 0.18s cubic-bezier(0.25,0.46,0.45,0.94), width 0.3s, height 0.3s, border-color 0.3s;
+  mix-blend-mode: difference;
+}
+.cursor-dot.hover { width: 10px; height: 10px; }
+.cursor-ring.hover { width: 60px; height: 60px; border-color: rgba(245,244,240,0.8); }
 
-  /* --- HERO SECTION (white background, image highlight) --- */
-  #hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: 7rem 3rem 5rem;
-    position: relative;
-    background: #FFFFFF;
-  }
-  .hero-bg-blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(70px);
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.4;
-  }
-  .blob1 { width: 480px; height: 480px; background: #C9D9E8; top: -150px; right: -100px; }
-  .blob2 { width: 380px; height: 380px; background: #D9E2EF; bottom: -80px; left: -80px; }
-  .blob3 { width: 300px; height: 300px; background: #E2E9F2; top: 30%; left: 20%; }
+/* ── PAGE LOADER ── */
+#loader {
+  position: fixed;
+  inset: 0;
+  background: var(--black);
+  z-index: 9990;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  transition: opacity 0.8s ease, visibility 0.8s;
+}
+#loader.hidden { opacity: 0; visibility: hidden; }
+.loader-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  color: var(--white);
+  clip-path: inset(0 100% 0 0);
+  animation: revealText 1s cubic-bezier(0.77,0,0.175,1) 0.3s forwards;
+}
+.loader-line {
+  width: 0;
+  height: 1px;
+  background: var(--white);
+  animation: growLine 0.8s ease 1.2s forwards;
+}
+@keyframes revealText { to { clip-path: inset(0 0% 0 0); } }
+@keyframes growLine { to { width: 200px; } }
 
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 1fr 0.9fr;
-    gap: 3rem;
-    align-items: center;
-    position: relative;
-    z-index: 2;
-    width: 100%;
-  }
-  .hero-text {
-    z-index: 2;
-  }
-  .hero-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    background: #F0F3F8;
-    border: 1px solid var(--border-light);
-    color: var(--accent);
-    font-size: 0.7rem;
-    padding: 0.4rem 1.2rem;
-    border-radius: 100px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 2rem;
-    font-weight: 500;
-  }
-  .hero-tag .dot {
-    width: 6px;
-    height: 6px;
-    background: var(--accent);
-    border-radius: 50%;
-    animation: pulse 2s infinite;
-  }
-  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.8)} }
+/* ── NAVIGATION ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.8rem 4rem;
+  mix-blend-mode: difference;
+  opacity: 0;
+  animation: fadeInNav 0.6s ease 2.2s forwards;
+}
+@keyframes fadeInNav { to { opacity: 1; } }
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 300;
+  color: var(--white);
+  letter-spacing: 0.15em;
+  text-decoration: none;
+}
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--white);
+  text-decoration: none;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  transition: opacity 0.3s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0;
+  width: 0; height: 1px;
+  background: currentColor;
+  transition: width 0.3s ease;
+}
+.nav-links a:hover { opacity: 1; }
+.nav-links a:hover::after { width: 100%; }
 
-  .hero-name {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(3rem, 7vw, 5.8rem);
-    font-weight: 800;
-    line-height: 0.95;
-    letter-spacing: -0.04em;
-    margin-bottom: 1rem;
-    color: #000000;
-  }
-  .hero-name .line2 {
-    background: var(--gradient-accent);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    display: block;
-  }
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  overflow: hidden;
+}
 
-  .hero-title {
-    font-size: 1rem;
-    color: var(--text-muted);
-    letter-spacing: 0.05em;
-    margin-bottom: 1.5rem;
-  }
-  .hero-title span {
-    color: var(--accent);
-    font-weight: 600;
-  }
-  .hero-desc {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    max-width: 540px;
-    line-height: 1.7;
-    margin-bottom: 2rem;
-  }
-  .hero-ctas {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    margin-bottom: 2rem;
-  }
-  .btn-primary {
-    background: var(--gradient-accent);
-    color: white;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.08em;
-    padding: 0.85rem 1.8rem;
-    border-radius: 6px;
-    text-decoration: none;
-    border: none;
-    transition: transform 0.2s, box-shadow 0.2s;
-    font-weight: 500;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    cursor: none;
-  }
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    background: #122c46;
-    box-shadow: 0 6px 14px rgba(0,0,0,0.08);
-  }
-  .btn-outline {
-    background: transparent;
-    border: 1px solid var(--border-focus);
-    color: var(--text-dark);
-    font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.08em;
-    padding: 0.85rem 1.8rem;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: border 0.2s, transform 0.2s;
-    cursor: none;
-  }
-  .btn-outline:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-    transform: translateY(-2px);
-  }
+/* Vertical ruled lines */
+#hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 80px 80px;
+  pointer-events: none;
+}
 
-  .hero-stats {
-    display: flex;
-    gap: 2.5rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--border-light);
-  }
-  .stat-num {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.8rem;
-    font-weight: 800;
-    background: var(--gradient-accent);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  .stat-label {
-    font-size: 0.65rem;
-    color: var(--text-muted);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-top: 0.2rem;
-  }
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10rem 4rem 6rem;
+  position: relative;
+  z-index: 2;
+}
 
-  /* Hero Image (black & white photo, crisp) */
-  .hero-image {
-    position: relative;
-    justify-self: center;
-    width: 100%;
-    max-width: 360px;
-  }
-  .profile-img-wrapper {
-    position: relative;
-    background: #ffffff;
-    padding: 6px;
-    border-radius: 28px;
-    border: 1px solid var(--border-light);
-    box-shadow: var(--shadow-md);
-    transition: transform 0.25s ease, box-shadow 0.3s;
-  }
-  .profile-img-wrapper:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 24px 36px -16px rgba(0, 0, 0, 0.15);
-  }
-  .profile-img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 24px;
-    background: #F2F5F9;
-    object-fit: cover;
-    filter: contrast(1.02) brightness(0.98);
-  }
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: slideUp 0.8s ease 2.4s forwards;
+}
+.hero-eyebrow-line {
+  width: 40px; height: 1px;
+  background: var(--mid);
+}
+.hero-eyebrow span {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--mid);
+}
 
-  /* --- SECTION COMMON (light bg with accents) --- */
-  section {
-    padding: 5rem 3rem;
-    position: relative;
-    background: var(--bg-white);
-  }
-  #skills, #projects, #certifications, #learning, #contact {
-    background: var(--bg-offwhite);
-  }
-  .section-label {
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 0.75rem;
-    font-weight: 500;
-  }
-  .section-title {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(1.8rem, 4vw, 3rem);
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    margin-bottom: 3rem;
-    color: #000;
-  }
-  .section-title em {
-    font-style: normal;
-    background: var(--gradient-accent);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
+.hero-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(5rem, 10vw, 9rem);
+  font-weight: 300;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  margin-bottom: 2.5rem;
+  overflow: hidden;
+}
+.hero-name .word {
+  display: block;
+  clip-path: inset(0 0 100% 0);
+  animation: slideUpWord 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.hero-name .word:nth-child(1) { animation-delay: 2.5s; }
+.hero-name .word:nth-child(2) {
+  font-style: italic;
+  animation-delay: 2.7s;
+  color: var(--light-gray);
+}
+@keyframes slideUpWord { to { clip-path: inset(0 0 0% 0); } }
 
-  /* Skills Grid */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.8rem;
-  }
-  .skill-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border-light);
-    border-radius: 18px;
-    padding: 1.6rem;
-    transition: all 0.25s;
-  }
-  .skill-card:hover {
-    border-color: var(--accent);
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
-  }
-  .skill-icon {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-  }
-  .skill-name {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-  }
-  .skill-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 0.8rem;
-  }
-  .tag {
-    font-size: 0.6rem;
-    letter-spacing: 0.05em;
-    padding: 0.2rem 0.7rem;
-    border-radius: 30px;
-    background: #F2F5F9;
-    color: var(--text-muted);
-    border: 1px solid var(--border-light);
-  }
+.hero-title {
+  font-size: 0.85rem;
+  color: var(--mid);
+  letter-spacing: 0.08em;
+  line-height: 1.6;
+  max-width: 400px;
+  margin-bottom: 3rem;
+  opacity: 0;
+  animation: slideUp 0.8s ease 3s forwards;
+}
+.hero-title strong { color: var(--white); font-weight: 400; }
 
-  /* Experience Timeline */
-  .timeline {
-    position: relative;
-    padding-left: 2rem;
-  }
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: var(--accent);
-    border-radius: 2px;
-  }
-  .timeline-item {
-    position: relative;
-    margin-bottom: 3rem;
-    padding-left: 1.8rem;
-  }
-  .timeline-dot {
-    position: absolute;
-    left: -2.55rem;
-    top: 0.35rem;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    border: 2px solid var(--accent);
-    background: white;
-    transition: 0.2s;
-  }
-  .timeline-item:hover .timeline-dot {
-    background: var(--accent);
-    transform: scale(1.2);
-  }
-  .timeline-date {
-    font-size: 0.7rem;
-    color: var(--accent);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 0.4rem;
-    font-weight: 500;
-  }
-  .timeline-role {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-  }
-  .timeline-company {
-    font-size: 0.8rem;
-    color: var(--accent-soft);
-    margin-bottom: 0.8rem;
-  }
-  .timeline-desc {
-    font-size: 0.82rem;
-    color: var(--text-muted);
-    line-height: 1.8;
-  }
-  .timeline-desc li {
-    margin-bottom: 0.4rem;
-    list-style: none;
-    padding-left: 1rem;
-    position: relative;
-  }
-  .timeline-desc li::before {
-    content: '▹';
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-  }
+.hero-ctas {
+  display: flex;
+  gap: 1.2rem;
+  opacity: 0;
+  animation: slideUp 0.8s ease 3.1s forwards;
+}
+.btn-primary {
+  background: var(--white);
+  color: var(--black);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 1rem 2.2rem;
+  text-decoration: none;
+  transition: background 0.3s, color 0.3s, transform 0.3s;
+  cursor: none;
+}
+.btn-primary:hover {
+  background: var(--black);
+  color: var(--white);
+  outline: 1px solid var(--white);
+  transform: translateY(-2px);
+}
+.btn-ghost {
+  border: 1px solid rgba(255,255,255,0.2);
+  color: var(--white);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 1rem 2.2rem;
+  text-decoration: none;
+  transition: border-color 0.3s, transform 0.3s;
+  cursor: none;
+}
+.btn-ghost:hover { border-color: var(--white); transform: translateY(-2px); }
 
-  /* Projects */
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.8rem;
-  }
-  .project-card {
-    background: white;
-    border: 1px solid var(--border-light);
-    border-radius: 18px;
-    padding: 1.8rem;
-    transition: all 0.25s;
-    position: relative;
-  }
-  .project-card:hover {
-    transform: translateY(-6px);
-    border-color: var(--accent);
-    box-shadow: var(--shadow-md);
-  }
-  .project-num {
-    font-family: 'Syne', sans-serif;
-    font-size: 3.8rem;
-    font-weight: 800;
-    color: #EAEFF5;
-    position: absolute;
-    top: 0.5rem;
-    right: 1rem;
-    line-height: 1;
-  }
-  .project-tag {
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 0.8rem;
-  }
-  .project-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: 0.8rem;
-  }
-  .project-desc {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    line-height: 1.7;
-  }
+.hero-stats {
+  position: absolute;
+  bottom: 4rem; left: 4rem;
+  display: flex;
+  gap: 3rem;
+  opacity: 0;
+  animation: slideUp 0.8s ease 3.3s forwards;
+}
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.8rem;
+  font-weight: 300;
+  line-height: 1;
+}
+.stat-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-top: 0.4rem;
+}
 
-  /* Certifications */
-  .cert-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  .cert-item {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    background: white;
-    border: 1px solid var(--border-light);
-    border-radius: 16px;
-    padding: 1rem 1.5rem;
-    transition: all 0.2s;
-  }
-  .cert-item:hover {
-    border-color: var(--accent);
-    transform: translateX(6px);
-  }
-  .cert-icon {
-    font-size: 1.5rem;
-    flex-shrink: 0;
-  }
-  .cert-name {
-    font-family: 'Syne', sans-serif;
-    font-weight: 600;
-    font-size: 0.95rem;
-  }
-  .cert-issuer {
-    font-size: 0.7rem;
-    color: var(--text-muted);
-    margin-top: 0.15rem;
-  }
-  .cert-badge {
-    margin-left: auto;
-    font-size: 0.65rem;
-    letter-spacing: 0.08em;
-    padding: 0.25rem 0.8rem;
-    border-radius: 100px;
-    background: #EDF2F7;
-    border: 1px solid var(--border-light);
-    color: var(--accent);
-  }
+.hero-right {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-right::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--black) 0%, transparent 15%);
+  z-index: 1;
+  pointer-events: none;
+}
+.profile-img-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  animation: fadeIn 1.5s ease 2.8s forwards;
+}
+.profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  filter: grayscale(100%) contrast(1.1) brightness(0.85);
+}
+/* Overlay text on image */
+.hero-img-caption {
+  position: absolute;
+  bottom: 4rem; right: 3rem;
+  z-index: 2;
+  text-align: right;
+  opacity: 0;
+  animation: slideUp 0.8s ease 3.4s forwards;
+}
+.hero-img-caption span {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  display: block;
+}
 
-  /* Learning Grid */
-  .learning-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1.2rem;
-    margin-bottom: 2rem;
-  }
-  .learning-item {
-    background: white;
-    border: 1px solid var(--border-light);
-    border-radius: 16px;
-    padding: 1.2rem;
-    transition: all 0.2s;
-  }
-  .learning-item:hover {
-    border-color: var(--accent);
-    transform: translateY(-2px);
-  }
-  .learning-header {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    margin-bottom: 0.5rem;
-  }
-  .learning-icon {
-    font-size: 1.3rem;
-  }
-  .learning-name {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 0.9rem;
-  }
-  .progress-bar {
-    height: 5px;
-    background: #E4E9F0;
-    border-radius: 6px;
-    overflow: hidden;
-    margin: 0.8rem 0 0.4rem;
-  }
-  .progress-fill {
-    height: 100%;
-    border-radius: 6px;
-    background: var(--gradient-accent);
-  }
-  .progress-label {
-    font-size: 0.65rem;
-    color: var(--text-muted);
-    display: flex;
-    justify-content: space-between;
-  }
-  .next-stop {
-    margin-top: 0.6rem;
-    font-size: 0.7rem;
-    color: var(--accent);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-weight: 500;
-  }
-  .next-stop span {
-    font-size: 0.9rem;
-  }
-  .pathway-note {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    margin-top: 1rem;
-    border-left: 2px solid var(--accent);
-    padding-left: 1rem;
-  }
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn { to { opacity: 1; } }
 
-  /* Contact */
-  .contact-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: center;
-  }
-  .contact-line {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-    padding: 0.9rem 1.2rem;
-    background: white;
-    border: 1px solid var(--border-light);
-    border-radius: 14px;
-    text-decoration: none;
-    color: var(--text-dark);
-    transition: all 0.2s;
-  }
-  .contact-line:hover {
-    border-color: var(--accent);
-    transform: translateX(4px);
-  }
-  .contact-line-icon {
-    font-size: 1.2rem;
-  }
-  .contact-line-label {
-    font-size: 0.65rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-  }
-  .contact-line-value {
-    font-size: 0.85rem;
-    margin-top: 0.1rem;
-    font-weight: 500;
-  }
-  .contact-cta-text {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(1.2rem, 3vw, 1.9rem);
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    margin-bottom: 1rem;
-  }
-  .contact-cta-sub {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    line-height: 1.7;
-    margin-bottom: 2rem;
-  }
+/* ── DIVIDER ── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+  margin: 0 4rem;
+}
 
-  footer {
-    text-align: center;
-    padding: 2rem;
-    border-top: 1px solid var(--border-light);
-    font-size: 0.7rem;
-    color: var(--text-muted);
-    background: white;
-  }
-  footer span {
-    color: var(--accent);
-    font-weight: 600;
-  }
+/* ── SECTIONS COMMON ── */
+section:not(#hero) {
+  padding: 7rem 4rem;
+  position: relative;
+}
 
-  /* Reveal animation */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s ease;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 5rem;
+}
+.section-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 7rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.04);
+  line-height: 1;
+  position: absolute;
+  top: 3rem; right: 4rem;
+  pointer-events: none;
+  user-select: none;
+}
+.section-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.section-label::before {
+  content: '';
+  display: block;
+  width: 30px; height: 1px;
+  background: var(--mid);
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.8rem, 5vw, 4.5rem);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.section-title em {
+  font-style: italic;
+  color: var(--light-gray);
+}
 
-  @media (max-width: 880px) {
-    .hero-grid {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-      text-align: center;
-    }
-    .hero-text {
-      text-align: center;
-    }
-    .hero-desc {
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .hero-stats {
-      justify-content: center;
-    }
-    .hero-ctas {
-      justify-content: center;
-    }
-    .hero-image {
-      max-width: 260px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    nav {
-      padding: 1rem 1.5rem;
-    }
-    .nav-links {
-      display: none;
-    }
-    section {
-      padding: 4rem 1.5rem;
-    }
-    .contact-wrapper {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-  }
+/* ── SKILLS ── */
+#skills { background: var(--black); }
 
-  .hero-name:hover .line2 {
-    animation: glitch 0.3s steps(1, end) 1;
-  }
-  @keyframes glitch {
-    0% { text-shadow: 1px 0 var(--accent), -1px 0 #ccc; }
-    50% { text-shadow: -1px 0 var(--accent), 1px 0 #ccc; }
-    100% { text-shadow: none; }
-  }
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid rgba(255,255,255,0.07);
+}
+.skill-card {
+  padding: 2.5rem;
+  border-right: 1px solid rgba(255,255,255,0.07);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  position: relative;
+  overflow: hidden;
+  transition: background 0.4s ease;
+}
+.skill-card:nth-child(3n) { border-right: none; }
+.skill-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.03);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.skill-card:hover::after { opacity: 1; }
+.skill-card:hover { background: rgba(255,255,255,0.02); }
+
+.skill-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 0.15em;
+  margin-bottom: 1.5rem;
+}
+.skill-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+.skill-desc {
+  font-size: 0.78rem;
+  color: var(--mid);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  padding: 0.3rem 0.8rem;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  transition: border-color 0.3s, color 0.3s;
+}
+.skill-card:hover .tag { border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.7); }
+
+/* ── EXPERIENCE ── */
+#experience { background: #111111; }
+
+.timeline {
+  position: relative;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 1px;
+  background: rgba(255,255,255,0.1);
+}
+.timeline-item {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 4rem;
+  padding: 3rem 0 3rem 3rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  position: relative;
+  transition: background 0.3s;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -4px; top: 3.5rem;
+  width: 9px; height: 9px;
+  border: 1px solid rgba(255,255,255,0.3);
+  background: var(--black);
+  border-radius: 50%;
+  transition: background 0.3s, border-color 0.3s;
+}
+.timeline-item:hover::before { background: var(--white); border-color: var(--white); }
+.timeline-item:last-child { border-bottom: none; }
+
+.timeline-left { padding-top: 0.3rem; }
+.timeline-date {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: var(--mid);
+  margin-bottom: 0.6rem;
+  text-transform: uppercase;
+}
+.timeline-company {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.5;
+}
+
+.timeline-role {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 300;
+  margin-bottom: 1.2rem;
+  line-height: 1.1;
+}
+.timeline-desc {
+  list-style: none;
+}
+.timeline-desc li {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.8;
+  padding-left: 1.2rem;
+  position: relative;
+  margin-bottom: 0.3rem;
+}
+.timeline-desc li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: rgba(255,255,255,0.2);
+}
+
+/* ── PROJECTS ── */
+#projects { background: var(--black); }
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+.project-card {
+  background: #111;
+  padding: 3rem;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.4s;
+  cursor: none;
+}
+.project-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 1px;
+  background: rgba(255,255,255,0);
+  transition: background 0.4s;
+}
+.project-card:hover { background: #181818; }
+.project-card:hover::before { background: rgba(255,255,255,0.1); }
+
+.project-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 5rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.04);
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+.project-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 1.2rem;
+}
+.project-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+.project-desc {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.7;
+}
+.project-arrow {
+  position: absolute;
+  bottom: 2rem; right: 2rem;
+  width: 40px; height: 40px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+.project-card:hover .project-arrow { opacity: 1; transform: translateY(0); }
+
+/* ── CERTIFICATIONS ── */
+#certifications { background: #0d0d0d; }
+
+.cert-list {
+  display: flex;
+  flex-direction: column;
+}
+.cert-item {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 2rem;
+  padding: 1.8rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: padding-left 0.3s ease;
+  position: relative;
+}
+.cert-item:first-child { border-top: 1px solid rgba(255,255,255,0.06); }
+.cert-item:hover { padding-left: 1rem; }
+
+.cert-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+}
+.cert-issuer {
+  font-size: 0.72rem;
+  color: var(--mid);
+  margin-top: 0.3rem;
+  letter-spacing: 0.05em;
+}
+.cert-badge {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.4rem 1rem;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.4);
+  white-space: nowrap;
+}
+.cert-year {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.2);
+  font-style: italic;
+}
+
+/* ── LEARNING ── */
+#learning { background: var(--black); }
+
+.learning-intro {
+  font-size: 0.85rem;
+  color: var(--mid);
+  max-width: 500px;
+  line-height: 1.8;
+  margin-bottom: 4rem;
+}
+.learning-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+.learning-item {
+  padding: 2rem;
+  border: 1px solid rgba(255,255,255,0.07);
+  position: relative;
+  transition: border-color 0.3s;
+}
+.learning-item:hover { border-color: rgba(255,255,255,0.2); }
+.learning-item.active { border-color: rgba(255,255,255,0.25); }
+
+.learning-status {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 1rem;
+}
+.learning-status.in-progress { color: rgba(255,255,255,0.7); }
+.learning-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 1.2rem;
+}
+.progress-track {
+  height: 1px;
+  background: rgba(255,255,255,0.1);
+  position: relative;
+  margin-bottom: 0.6rem;
+}
+.progress-fill {
+  position: absolute;
+  top: 0; left: 0;
+  height: 100%;
+  background: rgba(255,255,255,0.6);
+  transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s;
+  width: 0;
+}
+.progress-fill.animated { }
+.progress-pct {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.05em;
+}
+
+.pathway-note {
+  border-left: 1px solid rgba(255,255,255,0.15);
+  padding: 1.5rem 2rem;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.7;
+}
+.pathway-note strong { color: var(--white); font-weight: 400; }
+
+/* ── CONTACT ── */
+#contact { background: #0a0a0a; overflow: hidden; }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8rem;
+  align-items: start;
+}
+.contact-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 2rem;
+}
+.contact-tagline em { font-style: italic; color: var(--light-gray); }
+.contact-sub {
+  font-size: 0.82rem;
+  color: var(--mid);
+  line-height: 1.8;
+  margin-bottom: 2.5rem;
+  max-width: 380px;
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.contact-link {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  text-decoration: none;
+  color: var(--white);
+  transition: padding-left 0.3s ease;
+  cursor: none;
+}
+.contact-link:first-child { border-top: 1px solid rgba(255,255,255,0.06); }
+.contact-link:hover { padding-left: 0.8rem; }
+.contact-link-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mid);
+}
+.contact-link-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  font-weight: 300;
+}
+
+/* ── FOOTER ── */
+footer {
+  padding: 2.5rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.footer-left {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.2);
+}
+.footer-right {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.2);
+  font-style: italic;
+}
+
+/* ── SCROLL REVEAL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+/* ── STAGGER DELAYS ── */
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+.delay-5 { transition-delay: 0.5s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  #hero { grid-template-columns: 1fr; }
+  .hero-right { height: 60vw; }
+  .hero-left { padding: 9rem 2rem 5rem; }
+  .hero-stats { left: 2rem; }
+  nav { padding: 1.5rem 2rem; }
+  .nav-links { display: none; }
+  section:not(#hero) { padding: 5rem 2rem; }
+  .skills-grid { grid-template-columns: 1fr; }
+  .skill-card { border-right: none; }
+  .skill-card:nth-child(3n) { border-right: none; }
+  .timeline-item { grid-template-columns: 1fr; gap: 1rem; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .learning-grid { grid-template-columns: 1fr 1fr; }
+  .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .section-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  footer { flex-direction: column; gap: 1rem; text-align: center; }
+  .section-divider { margin: 0 2rem; }
+  .hero-name { font-size: clamp(4rem, 12vw, 7rem); }
+}
+@media (max-width: 600px) {
+  .learning-grid { grid-template-columns: 1fr; }
+  .cert-item { grid-template-columns: 1fr; gap: 0.5rem; }
+  .cert-year { display: none; }
+}
 </style>
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-trail" id="cursorTrail"></div>
+<!-- Loader -->
+<div id="loader">
+  <div class="loader-name">HARIS ASIF</div>
+  <div class="loader-line"></div>
+</div>
 
+<!-- Custom Cursor -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Navigation -->
 <nav>
-  <div class="nav-logo">HA/</div>
+  <a href="#hero" class="nav-logo">H.A</a>
   <ul class="nav-links">
     <li><a href="#skills">Skills</a></li>
     <li><a href="#experience">Experience</a></li>
@@ -753,144 +891,416 @@
   </ul>
 </nav>
 
+<!-- ─── HERO ─── -->
 <section id="hero">
-  <div class="hero-bg-blob blob1"></div>
-  <div class="hero-bg-blob blob2"></div>
-  <div class="hero-bg-blob blob3"></div>
-  <div class="hero-grid">
-    <div class="hero-text">
-      <div class="hero-tag"><span class="dot"></span> IT Support | System Administrator</div>
-      <h1 class="hero-name">
-        Haris<br>
-        <span class="line2">Asif</span>
-      </h1>
-      <p class="hero-title">IT Support Engineer → <span>Aspiring DevOps Engineer (AZ-104 in progress)</span></p>
-      <p class="hero-desc">
-        IT professional with 2+ years of hands-on experience in Windows infrastructure, Active Directory, Microsoft 365, and networking. 
-        Comfortable working USA hours in remote settings. Currently preparing for <strong>Microsoft Azure Administrator (AZ-104)</strong> as the first step toward DevOps — combining system administration with cloud automation and CI/CD.
-      </p>
-      <div class="hero-ctas">
-        <a href="#contact" class="btn-primary">Get In Touch</a>
-        <a href="#experience" class="btn-outline">View Experience</a>
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span>IT Support · SysAdmin · DevOps Path</span>
+    </div>
+    <h1 class="hero-name">
+      <span class="word">Haris</span>
+      <span class="word">Asif</span>
+    </h1>
+    <p class="hero-title">
+      IT Support Engineer &amp; System Administrator<br>
+      <strong>Aspiring DevOps — AZ-104 in progress</strong>
+    </p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary">Get In Touch</a>
+      <a href="#experience" class="btn-ghost">View Experience</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">2+</div>
+        <div class="stat-label">Years Exp.</div>
       </div>
-      <div class="hero-stats">
-        <div><div class="stat-num">2+</div><div class="stat-label">Years Exp</div></div>
-        <div><div class="stat-num">3</div><div class="stat-label">Companies</div></div>
-        <div><div class="stat-num">4</div><div class="stat-label">Certifications</div></div>
-        <div><div class="stat-num">AZ-104</div><div class="stat-label">In Progress</div></div>
+      <div>
+        <div class="stat-num">3</div>
+        <div class="stat-label">Companies</div>
+      </div>
+      <div>
+        <div class="stat-num">4</div>
+        <div class="stat-label">Certifications</div>
+      </div>
+      <div>
+        <div class="stat-num">AZ-104</div>
+        <div class="stat-label">In Progress</div>
       </div>
     </div>
-    <div class="hero-image">
-      <div class="profile-img-wrapper">
-        <!-- NEW black & white portrait image -->
-        <img class="profile-img" src="https://iili.io/C9o12vS.jpg" alt="Haris Asif - IT Professional" onerror="this.src='https://ui-avatars.com/api/?name=Haris+Asif&background=1E3A5F&color=fff&rounded=true&bold=true&size=128'">
-      </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="profile-img-container">
+      <img class="profile-img"
+        src="https://iili.io/C9o12vS.jpg"
+        alt="Haris Asif"
+        onerror="this.src='https://ui-avatars.com/api/?name=Haris+Asif&background=222&color=fff&rounded=false&bold=false&size=400'">
+    </div>
+    <div class="hero-img-caption">
+      <span>Rawalpindi, Pakistan</span>
+      <span>Available · USA Hours</span>
     </div>
   </div>
 </section>
 
+<div class="section-divider"></div>
+
+<!-- ─── SKILLS ─── -->
 <section id="skills">
-  <div class="section-label">// 01 — Technical Arsenal</div>
-  <h2 class="section-title">Core <em>Skills</em></h2>
-  <div class="skills-grid reveal">
-    <div class="skill-card"><div class="skill-icon">🖥️</div><div class="skill-name">Windows & macOS Support</div><p style="font-size:0.78rem;color:var(--text-muted);line-height:1.6">End-user support for Windows 7/10/11 and macOS, including OS troubleshooting and software installation.</p><div class="skill-tags"><span class="tag">Windows OS</span><span class="tag">macOS</span><span class="tag">Peripherals</span></div></div>
-    <div class="skill-card"><div class="skill-icon">👥</div><div class="skill-name">Identity & Access</div><p style="font-size:0.78rem;color:var(--text-muted);line-height:1.6">Active Directory (AD) user lifecycle, Group Policy, onboarding/offboarding, and Entra ID basics.</p><div class="skill-tags"><span class="tag">Active Directory</span><span class="tag">Entra ID</span><span class="tag">GPO</span></div></div>
-    <div class="skill-card"><div class="skill-icon">☁️</div><div class="skill-name">Microsoft 365</div><p style="font-size:0.78rem;color:var(--text-muted);line-height:1.6">Administering mailboxes, Teams, SharePoint, MFA, and licensing for cloud productivity.</p><div class="skill-tags"><span class="tag">Exchange Online</span><span class="tag">Teams</span><span class="tag">MFA</span></div></div>
-    <div class="skill-card"><div class="skill-icon">🌐</div><div class="skill-name">Networking (CCNA-level)</div><p style="font-size:0.78rem;color:var(--text-muted);line-height:1.6">Routing, switching, VLANs, and network monitoring using SolarWinds, Cacti.</p><div class="skill-tags"><span class="tag">CCNA</span><span class="tag">VLANs</span><span class="tag">SolarWinds</span></div></div>
-    <div class="skill-card"><div class="skill-icon">🐧</div><div class="skill-name">Linux Administration</div><p style="font-size:0.78rem;color:var(--text-muted);line-height:1.6">User management, bash scripting, cron jobs, LVM, Red Hat Enterprise Linux fundamentals.</p><div class="skill-tags"><span class="tag">Linux CLI</span><span class="tag">Bash</span><span class="tag">RHEL</span></div></div>
-    <div class="skill-card"><div class="skill-icon">🎫</div><div class="skill-name">IT Helpdesk & Ticketing</div><p style="font-size:0.78rem;color:var(--text-muted);line-height:1.6">First-point customer contact, ticket management (phone/chat/email), remote support via AnyDesk, TeamViewer, RDP.</p><div class="skill-tags"><span class="tag">SLA tracking</span><span class="tag">Documentation</span><span class="tag">Remote tools</span></div></div>
+  <span class="section-num">01</span>
+  <div class="section-header reveal">
+    <div>
+      <div class="section-label">Technical Arsenal</div>
+      <h2 class="section-title">Core <em>Skills</em></h2>
+    </div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card reveal delay-1">
+      <div class="skill-number">01</div>
+      <div class="skill-name">Windows &amp; macOS Support</div>
+      <p class="skill-desc">End-user support for Windows 7/10/11 and macOS, OS troubleshooting and software installation at enterprise scale.</p>
+      <div class="skill-tags"><span class="tag">Windows OS</span><span class="tag">macOS</span><span class="tag">Peripherals</span></div>
+    </div>
+    <div class="skill-card reveal delay-2">
+      <div class="skill-number">02</div>
+      <div class="skill-name">Identity &amp; Access</div>
+      <p class="skill-desc">Active Directory user lifecycle, Group Policy, onboarding/offboarding, and Entra ID fundamentals.</p>
+      <div class="skill-tags"><span class="tag">Active Directory</span><span class="tag">Entra ID</span><span class="tag">GPO</span></div>
+    </div>
+    <div class="skill-card reveal delay-3">
+      <div class="skill-number">03</div>
+      <div class="skill-name">Microsoft 365</div>
+      <p class="skill-desc">Administering mailboxes, Teams, SharePoint, MFA, and licensing for cloud productivity environments.</p>
+      <div class="skill-tags"><span class="tag">Exchange Online</span><span class="tag">Teams</span><span class="tag">MFA</span></div>
+    </div>
+    <div class="skill-card reveal delay-1">
+      <div class="skill-number">04</div>
+      <div class="skill-name">Networking (CCNA-level)</div>
+      <p class="skill-desc">Routing, switching, VLANs, and network monitoring using SolarWinds and Cacti in production environments.</p>
+      <div class="skill-tags"><span class="tag">CCNA</span><span class="tag">VLANs</span><span class="tag">SolarWinds</span></div>
+    </div>
+    <div class="skill-card reveal delay-2">
+      <div class="skill-number">05</div>
+      <div class="skill-name">Linux Administration</div>
+      <p class="skill-desc">User management, bash scripting, cron jobs, LVM, and Red Hat Enterprise Linux fundamentals.</p>
+      <div class="skill-tags"><span class="tag">Linux CLI</span><span class="tag">Bash</span><span class="tag">RHEL</span></div>
+    </div>
+    <div class="skill-card reveal delay-3">
+      <div class="skill-number">06</div>
+      <div class="skill-name">IT Helpdesk &amp; Ticketing</div>
+      <p class="skill-desc">First-point customer contact, ticket management via phone/chat/email, remote support via AnyDesk, TeamViewer, RDP.</p>
+      <div class="skill-tags"><span class="tag">SLA Tracking</span><span class="tag">Documentation</span><span class="tag">Remote Tools</span></div>
+    </div>
   </div>
 </section>
 
+<div class="section-divider"></div>
+
+<!-- ─── EXPERIENCE ─── -->
 <section id="experience">
-  <div class="section-label">// 02 — Professional Experience</div>
-  <h2 class="section-title">Work <em>Experience</em></h2>
-  <div class="timeline reveal">
-    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-date">Aug 2025 — Present</div><div class="timeline-role">Virtual Assistant (IT Helpdesk)</div><div class="timeline-company">Cloudrepro, Rawalpindi (Remote, USA hours)</div><ul class="timeline-desc"><li>First point of contact for US-based clients (EST time zone); handle administrative and IT support tasks.</li><li>User account management, password resets, MFA support, shared folder permissions for internal team.</li><li>Maintained knowledge base for recurring issues and documented all interactions thoroughly.</li></ul></div>
-    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-date">May 2024 — Jul 2025</div><div class="timeline-role">TAC Engineer (Help Desk)</div><div class="timeline-company">Nova Communications, Islamabad</div><ul class="timeline-desc"><li>Provided on-call/chat/email network support to end users; helpdesk support for Windows OS, network connectivity, software installs.</li><li>Supported Microsoft 365 basics (mailboxes, Teams) and remote troubleshooting via AnyDesk/TeamViewer.</li><li>Network monitoring using SolarWinds, Cacti; ticket management and SLA tracking.</li><li>Escalated complex issues to Tier 2 with clear documentation.</li></ul></div>
-    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-date">Mar 2021 — Apr 2023</div><div class="timeline-role">Site Engineer</div><div class="timeline-company">Spine Engineering Pvt Ltd, Islamabad</div><ul class="timeline-desc"><li>Installed and maintained network equipment (routers, switches) and peripheral devices.</li><li>Hardware troubleshooting, vendor coordination, site documentation and surveys.</li></ul></div>
+  <span class="section-num">02</span>
+  <div class="section-header reveal">
+    <div>
+      <div class="section-label">Professional History</div>
+      <h2 class="section-title">Work <em>Experience</em></h2>
+    </div>
+  </div>
+  <div class="timeline">
+
+    <div class="timeline-item reveal">
+      <div class="timeline-left">
+        <div class="timeline-date">Aug 2025 — Present</div>
+        <div class="timeline-company">Cloudrepro, Rawalpindi<br>Remote · USA Hours</div>
+      </div>
+      <div>
+        <div class="timeline-role">Virtual Assistant<br>(IT Helpdesk)</div>
+        <ul class="timeline-desc">
+          <li>First point of contact for US-based clients on EST timezone; handling administrative and IT support tasks.</li>
+          <li>User account management, password resets, MFA support, and shared folder permissions for internal team.</li>
+          <li>Maintained knowledge base for recurring issues and documented all interactions thoroughly.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-left">
+        <div class="timeline-date">May 2024 — Jul 2025</div>
+        <div class="timeline-company">Nova Communications<br>Islamabad</div>
+      </div>
+      <div>
+        <div class="timeline-role">TAC Engineer<br>(Help Desk)</div>
+        <ul class="timeline-desc">
+          <li>Provided on-call/chat/email network support to end users; helpdesk support for Windows OS, network connectivity, and software installs.</li>
+          <li>Supported Microsoft 365 (mailboxes, Teams) and remote troubleshooting via AnyDesk and TeamViewer.</li>
+          <li>Network monitoring using SolarWinds and Cacti; ticket management with SLA tracking.</li>
+          <li>Escalated complex issues to Tier 2 with clear, documented handoffs.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-left">
+        <div class="timeline-date">Mar 2021 — Apr 2023</div>
+        <div class="timeline-company">Spine Engineering Pvt Ltd<br>Islamabad</div>
+      </div>
+      <div>
+        <div class="timeline-role">Site Engineer</div>
+        <ul class="timeline-desc">
+          <li>Installed and maintained network equipment (routers, switches) and peripheral devices across multiple sites.</li>
+          <li>Hardware troubleshooting, vendor coordination, site documentation and surveys.</li>
+        </ul>
+      </div>
+    </div>
+
   </div>
 </section>
 
+<div class="section-divider"></div>
+
+<!-- ─── PROJECTS ─── -->
 <section id="projects">
-  <div class="section-label">// 03 — Key Projects</div>
-  <h2 class="section-title">Notable <em>Work</em></h2>
-  <div class="projects-grid reveal">
-    <div class="project-card"><div class="project-num">01</div><div class="project-tag">Telecom Infrastructure</div><div class="project-title">Jazz Mega 2020 — IPRAN Deployment</div><p class="project-desc">Led IPRAN infrastructure deployment for Jazz's Mega 2020 initiative; coordinated physical installation, network configuration, and site verification.</p></div>
-    <div class="project-card"><div class="project-num">02</div><div class="project-tag">Technical Proposals</div><div class="project-title">CMPAK Bidding — Vendor Coordination</div><p class="project-desc">Prepared technical proposals and coordinated with vendors for hardware specifications, pricing, and delivery logistics.</p></div>
-    <div class="project-card"><div class="project-num">03</div><div class="project-tag">Python Automation</div><div class="project-title">IPTV Assistant Tool</div><p class="project-desc">Developed Python automation tool at Nova Communications to streamline IPTV support operations, reducing manual effort and resolution times.</p></div>
+  <span class="section-num">03</span>
+  <div class="section-header reveal">
+    <div>
+      <div class="section-label">Key Projects</div>
+      <h2 class="section-title">Notable <em>Work</em></h2>
+    </div>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card reveal delay-1">
+      <div class="project-num">01</div>
+      <div class="project-tag">Telecom Infrastructure</div>
+      <div class="project-title">Jazz Mega 2020 — IPRAN Deployment</div>
+      <p class="project-desc">Led IPRAN infrastructure deployment for Jazz's Mega 2020 initiative; coordinated physical installation, network configuration, and site verification.</p>
+      <div class="project-arrow">↗</div>
+    </div>
+    <div class="project-card reveal delay-2">
+      <div class="project-num">02</div>
+      <div class="project-tag">Technical Proposals</div>
+      <div class="project-title">CMPAK Bidding — Vendor Coordination</div>
+      <p class="project-desc">Prepared technical proposals and coordinated with vendors for hardware specifications, pricing, and delivery logistics.</p>
+      <div class="project-arrow">↗</div>
+    </div>
+    <div class="project-card reveal delay-3">
+      <div class="project-num">03</div>
+      <div class="project-tag">Python Automation</div>
+      <div class="project-title">IPTV Assistant Tool</div>
+      <p class="project-desc">Developed a Python automation tool at Nova Communications to streamline IPTV support operations, reducing manual effort and resolution times significantly.</p>
+      <div class="project-arrow">↗</div>
+    </div>
   </div>
 </section>
 
+<div class="section-divider"></div>
+
+<!-- ─── CERTIFICATIONS ─── -->
 <section id="certifications">
-  <div class="section-label">// 04 — Credentials</div>
-  <h2 class="section-title">Certifications & <em>Training</em></h2>
-  <div class="cert-list reveal">
-    <div class="cert-item"><div class="cert-icon">🏅</div><div><div class="cert-name">Microsoft 365 Administration</div><div class="cert-issuer">LinkedIn Learning</div></div><div class="cert-badge">Cloud</div></div>
-    <div class="cert-item"><div class="cert-icon">🌐</div><div><div class="cert-name">CCNA — Cisco Certified Network Associate</div><div class="cert-issuer">eHunarmand</div></div><div class="cert-badge">Networking</div></div>
-    <div class="cert-item"><div class="cert-icon">🖥️</div><div><div class="cert-name">System Administration & IT Infrastructure</div><div class="cert-issuer">NAVTTC</div></div><div class="cert-badge">Sysadmin</div></div>
-    <div class="cert-item"><div class="cert-icon">🐧</div><div><div class="cert-name">Fundamentals of Red Hat Enterprise Linux</div><div class="cert-issuer">Red Hat</div></div><div class="cert-badge">Linux</div></div>
-    <div class="cert-item"><div class="cert-icon">🎓</div><div><div class="cert-name">BS Electrical Engineering</div><div class="cert-issuer">Air University, Islamabad — 2020</div></div><div class="cert-badge">Degree</div></div>
+  <span class="section-num">04</span>
+  <div class="section-header reveal">
+    <div>
+      <div class="section-label">Credentials</div>
+      <h2 class="section-title">Certifications &amp; <em>Education</em></h2>
+    </div>
+  </div>
+  <div class="cert-list">
+    <div class="cert-item reveal delay-1">
+      <div>
+        <div class="cert-name">Microsoft 365 Administration</div>
+        <div class="cert-issuer">LinkedIn Learning</div>
+      </div>
+      <div class="cert-year">2024</div>
+      <div class="cert-badge">Cloud</div>
+    </div>
+    <div class="cert-item reveal delay-2">
+      <div>
+        <div class="cert-name">CCNA — Cisco Certified Network Associate</div>
+        <div class="cert-issuer">eHunarmand</div>
+      </div>
+      <div class="cert-year">2023</div>
+      <div class="cert-badge">Networking</div>
+    </div>
+    <div class="cert-item reveal delay-3">
+      <div>
+        <div class="cert-name">System Administration &amp; IT Infrastructure</div>
+        <div class="cert-issuer">NAVTTC</div>
+      </div>
+      <div class="cert-year">2022</div>
+      <div class="cert-badge">Sysadmin</div>
+    </div>
+    <div class="cert-item reveal delay-4">
+      <div>
+        <div class="cert-name">Fundamentals of Red Hat Enterprise Linux</div>
+        <div class="cert-issuer">Red Hat</div>
+      </div>
+      <div class="cert-year">2023</div>
+      <div class="cert-badge">Linux</div>
+    </div>
+    <div class="cert-item reveal delay-5">
+      <div>
+        <div class="cert-name">BS Electrical Engineering</div>
+        <div class="cert-issuer">Air University, Islamabad</div>
+      </div>
+      <div class="cert-year">2020</div>
+      <div class="cert-badge">Degree</div>
+    </div>
   </div>
 </section>
 
+<div class="section-divider"></div>
+
+<!-- ─── LEARNING ─── -->
 <section id="learning">
-  <div class="section-label">// 05 — DevOps Pathway</div>
-  <h2 class="section-title">Current & <em>Next Steps</em></h2>
-  <p style="font-size:0.85rem;color:var(--text-muted);max-width:620px;margin-bottom:2rem;">Clear roadmap from system administration to DevOps. Active focus on Azure, followed by Red Hat certification and core automation tools.</p>
-  <div class="learning-grid reveal">
-    <div class="learning-item"><div class="learning-header"><span class="learning-icon">☁️</span><span class="learning-name">Microsoft Azure (AZ-104)</span></div><div class="progress-bar"><div class="progress-fill" style="width:55%"></div></div><div class="progress-label"><span>In Progress · hands-on labs</span><span>55%</span></div></div>
-    <div class="learning-item"><div class="learning-header"><span class="learning-icon">🐧</span><span class="learning-name">RHCSA (Red Hat)</span></div><div class="next-stop"><span>→</span> Next milestone</div><div class="progress-label" style="margin-top:0.3rem;">Enterprise Linux deep dive</div></div>
-    <div class="learning-item"><div class="learning-header"><span class="learning-icon">🐳</span><span class="learning-name">Containerization (Docker)</span></div><div class="next-stop"><span>→</span> Next stop</div></div>
-    <div class="learning-item"><div class="learning-header"><span class="learning-icon">⚙️</span><span class="learning-name">CI/CD Pipelines</span></div><div class="next-stop"><span>→</span> Up next</div></div>
-    <div class="learning-item"><div class="learning-header"><span class="learning-icon">🔧</span><span class="learning-name">Infrastructure as Code (Terraform)</span></div><div class="next-stop"><span>→</span> Planned</div></div>
-    <div class="learning-item"><div class="learning-header"><span class="learning-icon">🐍</span><span class="learning-name">Automation (Python/Bash)</span></div><div class="next-stop"><span>→</span> Deepen scripting</div></div>
+  <span class="section-num">05</span>
+  <div class="section-header reveal">
+    <div>
+      <div class="section-label">DevOps Pathway</div>
+      <h2 class="section-title">Current &amp; <em>Next Steps</em></h2>
+    </div>
   </div>
-  <div class="pathway-note reveal">⚡ First target: <strong>AZ-104 (Azure Administrator)</strong> → then RHCSA → container orchestration & IaC.</div>
+  <p class="learning-intro reveal">A clear roadmap from system administration to DevOps. Active focus on Azure, followed by Red Hat certification and core automation tools.</p>
+  <div class="learning-grid">
+    <div class="learning-item active reveal delay-1" data-progress="55">
+      <div class="learning-status in-progress">● In Progress</div>
+      <div class="learning-name">Microsoft Azure (AZ-104)</div>
+      <div class="progress-track">
+        <div class="progress-fill" data-width="55%"></div>
+      </div>
+      <div class="progress-pct">55% · Hands-on labs</div>
+    </div>
+    <div class="learning-item reveal delay-2">
+      <div class="learning-status">→ Next Milestone</div>
+      <div class="learning-name">RHCSA — Red Hat</div>
+      <div style="font-size:0.72rem; color:rgba(255,255,255,0.25); margin-top:0.5rem;">Enterprise Linux deep dive</div>
+    </div>
+    <div class="learning-item reveal delay-3">
+      <div class="learning-status">→ Next Stop</div>
+      <div class="learning-name">Containerization (Docker)</div>
+    </div>
+    <div class="learning-item reveal delay-1">
+      <div class="learning-status">→ Up Next</div>
+      <div class="learning-name">CI/CD Pipelines</div>
+    </div>
+    <div class="learning-item reveal delay-2">
+      <div class="learning-status">→ Planned</div>
+      <div class="learning-name">Infrastructure as Code (Terraform)</div>
+    </div>
+    <div class="learning-item reveal delay-3">
+      <div class="learning-status">→ Deepening</div>
+      <div class="learning-name">Automation (Python / Bash)</div>
+    </div>
+  </div>
+  <div class="pathway-note reveal">
+    First target: <strong>AZ-104 (Azure Administrator)</strong> → then RHCSA → container orchestration and Infrastructure as Code.
+  </div>
 </section>
 
+<div class="section-divider"></div>
+
+<!-- ─── CONTACT ─── -->
 <section id="contact">
-  <div class="section-label">// 06 — Let's Connect</div>
-  <h2 class="section-title">Get In <em>Touch</em></h2>
-  <div class="contact-wrapper reveal">
-    <div class="contact-info">
-      <a href="mailto:haris29430@gmail.com" class="contact-line"><span class="contact-line-icon">✉️</span><div><div class="contact-line-label">Email</div><div class="contact-line-value">haris29430@gmail.com</div></div></a>
-      <a href="tel:+923165685168" class="contact-line"><span class="contact-line-icon">📱</span><div><div class="contact-line-label">Phone</div><div class="contact-line-value">+92 316 5685168</div></div></a>
-      <div class="contact-line"><span class="contact-line-icon">📍</span><div><div class="contact-line-label">Location</div><div class="contact-line-value">Rawalpindi, Pakistan (Remote · USA hours ready)</div></div></div>
-      <a href="https://www.linkedin.com/in/haris-asif-3bab56283/" target="_blank" class="contact-line"><span class="contact-line-icon">🔗</span><div><div class="contact-line-label">LinkedIn</div><div class="contact-line-value">linkedin.com/in/haris-asif</div></div></a>
+  <span class="section-num">06</span>
+  <div class="contact-grid">
+    <div class="reveal">
+      <div class="section-label">Let's Connect</div>
+      <h2 class="section-title" style="margin-bottom:1.5rem;">Get In <em>Touch</em></h2>
+      <p class="contact-sub">Open to IT Support &amp; Junior DevOps roles. I bring proven IT support fundamentals, system administration, networking, and a methodical approach to learning. Available on USA hours.</p>
+      <a href="mailto:haris29430@gmail.com" class="btn-primary" style="display:inline-block;">Send a Message →</a>
     </div>
-    <div class="contact-cta">
-      <div class="contact-cta-text">Open to IT Support & Junior DevOps roles · AZ-104 in progress</div>
-      <p class="contact-cta-sub">I bring proven IT support fundamentals, system administration, networking, and a methodical approach to learning. Currently bridging the gap to DevOps with Azure, containers, and automation. If you need someone who understands both end-user needs and infrastructure reliability, let’s talk.</p>
-      <a href="mailto:haris29430@gmail.com" class="btn-primary">Send Me a Message →</a>
+    <div class="contact-links reveal">
+      <a href="mailto:haris29430@gmail.com" class="contact-link">
+        <div class="contact-link-label">Email</div>
+        <div class="contact-link-value">haris29430@gmail.com</div>
+      </a>
+      <a href="tel:+923165685168" class="contact-link">
+        <div class="contact-link-label">Phone</div>
+        <div class="contact-link-value">+92 316 5685168</div>
+      </a>
+      <div class="contact-link" style="cursor:default;">
+        <div class="contact-link-label">Location</div>
+        <div class="contact-link-value">Rawalpindi, Pakistan</div>
+      </div>
+      <a href="https://www.linkedin.com/in/haris-asif-3bab56283/" target="_blank" class="contact-link">
+        <div class="contact-link-label">LinkedIn</div>
+        <div class="contact-link-value">haris-asif-3bab56283</div>
+      </a>
     </div>
   </div>
 </section>
 
+<!-- ─── FOOTER ─── -->
 <footer>
-  <p>Built with ❤️ by <span>Haris Asif</span> — Rawalpindi, Pakistan · DevOps Journey · 2025</p>
+  <div class="footer-left">© 2025 Haris Asif · Rawalpindi, Pakistan</div>
+  <div class="footer-right">Built for the DevOps journey</div>
 </footer>
 
 <script>
-  const cursor = document.getElementById('cursor');
-  const trail = document.getElementById('cursorTrail');
-  document.addEventListener('mousemove', e => {
-    cursor.style.left = e.clientX - 4 + 'px';
-    cursor.style.top = e.clientY - 4 + 'px';
-    setTimeout(() => {
-      trail.style.left = e.clientX - 16 + 'px';
-      trail.style.top = e.clientY - 16 + 'px';
-    }, 60);
-  });
-  document.querySelectorAll('a, button, .btn-primary, .btn-outline').forEach(el => {
-    el.addEventListener('mouseenter', () => cursor.style.transform = 'scale(2.2)');
-    el.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
-  });
+// ── PAGE LOADER
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hidden');
+  }, 2000);
+});
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+// ── CUSTOM CURSOR
+const dot = document.getElementById('cursorDot');
+const ring = document.getElementById('cursorRing');
+let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX; mouseY = e.clientY;
+  dot.style.left = mouseX + 'px';
+  dot.style.top = mouseY + 'px';
+});
+
+function animateRing() {
+  ringX += (mouseX - ringX) * 0.12;
+  ringY += (mouseY - ringY) * 0.12;
+  ring.style.left = ringX + 'px';
+  ring.style.top = ringY + 'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+
+document.querySelectorAll('a, button, .skill-card, .project-card, .cert-item, .learning-item').forEach(el => {
+  el.addEventListener('mouseenter', () => { dot.classList.add('hover'); ring.classList.add('hover'); });
+  el.addEventListener('mouseleave', () => { dot.classList.remove('hover'); ring.classList.remove('hover'); });
+});
+
+// ── SCROLL REVEAL
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      // Animate progress bars
+      const fill = e.target.querySelector('.progress-fill');
+      if (fill) {
+        const w = fill.getAttribute('data-width');
+        setTimeout(() => { fill.style.width = w; }, 100);
+      }
+      revealObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal, .reveal-left').forEach(el => revealObserver.observe(el));
+
+// ── NAV SCROLL
+const navEl = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 60) navEl.style.backdropFilter = 'blur(0)';
+  else navEl.style.backdropFilter = '';
+});
+
+// ── SMOOTH PARALLAX on hero image
+const heroRight = document.querySelector('.hero-right');
+const profileImg = document.querySelector('.profile-img');
+window.addEventListener('scroll', () => {
+  if (profileImg) {
+    const scrolled = window.scrollY;
+    profileImg.style.transform = `translateY(${scrolled * 0.12}px)`;
+  }
+});
 </script>
 </body>
 </html>
